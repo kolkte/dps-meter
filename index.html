@@ -113,7 +113,20 @@ body {
 
 <div id="meter">
     <div id="encounter-dps">0 DPS</div>
-    <div id="combatants"></div>
+
+    <!-- This test row ensures the overlay is NEVER blank -->
+    <div id="combatants">
+        <div class="combatant">
+            <div class="combatant-content" style="--job-color:#ef4444;">
+                <div class="combatant-bar" style="width:60px;"></div>
+                <div class="combatant-content-data">
+                    <span class="g-number">5000</span>
+                    <span class="g-counter">DPS</span>
+                </div>
+            </div>
+            <div class="combatant-name">Test Player</div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -121,14 +134,18 @@ body {
    CONNECT TO ACT WS SERVER
    ============================================ */
 
-const ws = new WebSocket("ws://127.0.0.1:10501/overlay");
-
-ws.onmessage = (msg) => {
-    const data = JSON.parse(msg.data);
-    if (data.type === "CombatData") {
-        updateOverlay(data);
-    }
-};
+let ws;
+try {
+    ws = new WebSocket("ws://127.0.0.1:10501/overlay");
+    ws.onmessage = (msg) => {
+        const data = JSON.parse(msg.data);
+        if (data.type === "CombatData") {
+            updateOverlay(data);
+        }
+    };
+} catch (e) {
+    console.log("WebSocket failed (likely local file mode). Test row will remain visible.");
+}
 
 /* ============================================
    UPDATE OVERLAY
@@ -205,4 +222,3 @@ function updateOverlay(data) {
 
 </body>
 </html>
-
