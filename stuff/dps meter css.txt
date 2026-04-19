@@ -1,0 +1,178 @@
+/* ===========================
+   ENCOUNTER HEADER
+   =========================== */
+
+/* Hide the encounter name text */
+.encounter-content-zone > span {
+    display: none !important;
+}
+
+/* Keep your 120px bar and push it down to make room for tooltip */
+.encounter {
+    width: 120px !important;
+    max-width: 120px !important;
+    margin: 240px auto 0 auto !important;
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* DPS above the bar, left-aligned, same width, same background, sharp corners */
+.encounter-content-numbers {
+    position: absolute !important;
+    bottom: 100% !important;
+    left: 0 !important;
+    width: 120px !important;
+    max-width: 120px !important;
+
+    background: var(--color-common) !important;
+    padding: 2px 6px !important;
+    border-radius: 0 !important;
+
+    white-space: nowrap !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    pointer-events: none !important;
+}
+
+/* ===========================
+   COMBATANT ROW LAYOUT
+   =========================== */
+
+.combatant {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+/* FORCE the DPS block to be exactly 120px wide */
+.combatant-content {
+    order: 1 !important;
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    padding: 2px 4px !important;
+    border-radius: 0 !important;
+
+    white-space: nowrap !important;
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* Job-color bar inside the 120px block */
+.combatant-content::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: var(--bar-width, 0px);
+
+    /* Keep bars semi-transparent even at full width */
+    opacity: 0.75;
+
+    /* Smooth animation */
+    transition: width 0.15s ease-out;
+
+    background: inherit !important;
+    z-index: -1;
+}
+
+/* Name sits to the right of the fixed 120px block */
+.combatant-name {
+    order: 2 !important;
+    white-space: nowrap !important;
+}
+
+/* Make number + DPS act as a right-aligned pair */
+.combatant-content-data {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    align-items: flex-end !important;
+}
+
+/* Number: pushes the pair to the right, small gap before DPS */
+.combatant-content-data .g-number {
+    margin-left: auto !important;
+    margin-right: 2px !important;
+}
+
+/* DPS text: sits close to the number */
+.combatant-content-data .g-counter {
+    margin-left: 0 !important;
+    position: relative !important;
+    top: 0px !important;
+}
+
+/* Remove ticker + max-hit */
+.s-ticker,
+.combatant-bottom {
+    display: none !important;
+}
+
+/* ===========================
+   TOOLTIP (COMBATANT DETAIL)
+   =========================== */
+
+/* Freeze Skyline tooltip so it NEVER moves based on hovered player */
+.combatant-detail,
+.combatant-detail--locked {
+    position: fixed !important;
+
+    top: 56px !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+
+    transform: translateX(-50%) !important;
+
+    width: 120px !important;
+    max-width: 120px !important;
+    min-width: 120px !important;
+
+    height: auto !important;
+    max-height: none !important;
+
+    pointer-events: none !important;
+    z-index: 999999 !important;
+}
+
+/* Prevent inner content from stretching */
+.combatant-detail .s-list,
+.combatant-detail--locked .s-list {
+    width: 100% !important;
+    max-width: 120px !important;
+}
+
+/* Percent of total DPS, anchored left inside the bar */
+.combatant-content .pct {
+    position: absolute;
+    left: 30px;
+    top: 54%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Number: pushes the pair to the right */
+.combatant-content-data .g-number {
+    margin-left: auto !important;
+    margin-right: 0px !important;
+}
+
+/* Hide the DPS text */
+.combatant-content-data .g-counter {
+    display: none !important;
+}
+
+

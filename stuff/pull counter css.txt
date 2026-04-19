@@ -1,0 +1,55 @@
+/* Load Skyline's exact font */
+@font-face {
+  font-family: 'Google Sans Flex';
+  font-style: normal;
+  font-weight: 1 1000;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/googlesansflex/v20/t5svIQcYNIWbFgDgAAzZ34auoVyXkJCOvp3SFWJbN5hF8Ju1x6sKCyp0l9sI40swNJwGpVd4AZzz0v6lJ4qFXNZhGjLvDSkV4W6GGn8.woff2) format('woff2');
+}
+
+/* Match Skyline number style + simulated boldness */
+body, body * {
+    font-family: 'Google Sans Flex', sans-serif !important;
+
+    /* PullCounter ignores variable weights, so we force bold */
+    font-weight: 700 !important;
+
+    /* Make it visually denser (Skyline-like) */
+    letter-spacing: -0.75px !important;
+    word-spacing: -3px !important;
+
+    /* Simulate thickness */
+    -webkit-text-stroke: 0.15px rgba(255,255,255,1) !important;
+
+    /* Vertical metrics */
+    line-height: 0.9 !important;
+    vertical-align: middle !important;
+
+    /* FULL opacity */
+    opacity: 1 !important;
+
+    /* Slightly smaller font */
+    font-size: 11px !important;
+
+    /* Color */
+    color: rgba(255, 255, 255, 1) !important;
+
+    /* No outline */
+    text-shadow: none !important;
+
+    /* Crisp rendering */
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+body {
+    position: fixed !important;
+    top: 20px !important;
+    right: 0px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    pointer-events: none;
+}
+
