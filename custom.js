@@ -1,12 +1,19 @@
 (function () {
+    let latestData = null;
+
+    // Capture Skyline's raw data (includes decimal DPS)
+    document.addEventListener("onOverlayDataUpdate", (e) => {
+        latestData = e.detail;
+    });
+
     function updateBars() {
         const rows = document.querySelectorAll('.combatant');
-        if (!rows.length) return;
+        if (!rows.length || !latestData) return;
 
         // Format total party DPS (encounter DPS) with thousand separators, no decimals
         const encounterNode = document.querySelector('.encounter-content-numbers .g-number');
-        if (encounterNode) {
-            const raw = Number(encounterNode.textContent.replace(/,/g, ''));
+        if (encounterNode && latestData.Encounter) {
+            const raw = Number(latestData.Encounter.DPS);
             if (!isNaN(raw)) {
                 encounterNode.textContent = raw.toLocaleString("en-US");
             }
@@ -15,12 +22,19 @@
         // Remove previous top-dps class
         rows.forEach(r => r.classList.remove('top-dps'));
 
-        // Collect DPS values
+        // Collect DPS values from Skyline data
         const dpsValues = [];
+        const combatants = latestData.Combatant || [];
+
         rows.forEach(row => {
-            const dpsNode = row.querySelector('.combatant-content-data .g-number');
-            if (!dpsNode) return;
-            const dps = Number(dpsNode.textContent.replace(/,/g, ''));
+            const nameNode = row.querySelector('.combatant-name');
+            if (!nameNode) return;
+
+            const name = nameNode.textContent.trim();
+            const c = combatants.find(x => x.name === name);
+            if (!c) return;
+
+            const dps = Number(c.DPS);
             if (!isNaN(dps)) dpsValues.push(dps);
         });
 
@@ -31,11 +45,16 @@
 
         // Update each row
         rows.forEach(row => {
+            const nameNode = row.querySelector('.combatant-name');
             const dpsNode = row.querySelector('.combatant-content-data .g-number');
             const bar = row.querySelector('.combatant-content');
-            if (!dpsNode || !bar) return;
+            if (!nameNode || !dpsNode || !bar) return;
 
-            const dps = Number(dpsNode.textContent.replace(/,/g, ''));
+            const name = nameNode.textContent.trim();
+            const c = combatants.find(x => x.name === name);
+            if (!c) return;
+
+            const dps = Number(c.DPS);
             if (isNaN(dps)) return;
 
             // Format player DPS with thousand separators and exactly 1 decimal
