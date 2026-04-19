@@ -127,7 +127,7 @@
 .combatant-detail--locked {
     position: fixed !important;
 
-    top: 56px !important;
+    top: 31px !important;
     left: 50% !important;
     right: auto !important;
     bottom: auto !important;
