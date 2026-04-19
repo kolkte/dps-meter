@@ -3,7 +3,7 @@
         const rows = document.querySelectorAll('.combatant');
         if (!rows.length) return;
 
-        // Format total party DPS (encounter DPS)
+        // Format total party DPS (encounter DPS) with thousand separators, no decimals
         const encounterNode = document.querySelector('.encounter-content-numbers .g-number');
         if (encounterNode) {
             const raw = Number(encounterNode.textContent.replace(/,/g, ''));
@@ -38,8 +38,11 @@
             const dps = Number(dpsNode.textContent.replace(/,/g, ''));
             if (isNaN(dps)) return;
 
-            // Format DPS with thousand separators
-            dpsNode.textContent = dps.toLocaleString("en-US");
+            // Format player DPS with thousand separators and exactly 1 decimal
+            dpsNode.textContent = dps.toLocaleString("en-US", {
+                minimumFractionDigits: 1,
+                maximumFractionDigits: 1
+            });
 
             // Scale bar
             const pctOfTop = Math.min(dps / topDPS, 1);
