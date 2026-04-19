@@ -38,7 +38,8 @@
   html[data-font='default'][lang='ko'] {
     font-family: Inter, Noto Sans KR, sans-serif;
   }
-</style><style id="skyline-custom-css"></style><style id="skyline-css-vars">body {
+</style>
+    <style id="skyline-custom-css"></style><style id="skyline-css-vars">body {
   --color-common: rgba(145, 145, 145, 0.5);
   --color-self: rgba(238, 238, 238, 0.65);
   --color-ticker-cd: rgba(255, 165, 0, 0.9);
@@ -50,7 +51,21 @@
   --color-role-dps: rgba(232, 107, 121, 0.5);
   --color-role-tank: rgba(138, 162, 211, 0.6);
   --color-role-healer: rgba(123, 170, 23, 0.5);
-}</style></head>
+}</style>
+<style>
+      #pullcounter {
+        position: fixed;
+        top: 20px;
+        right: 0;
+        width: 60px;
+        height: 40px;
+        border: none;
+        background: transparent;
+        pointer-events: none;
+        z-index: 2147483647;
+      }
+    </style>
+</head>
   <body data-theme="default">
     <iframe id="pullcounter"
             src="file:///C:/Users/konsta/AppData/Roaming/Advanced Combat Tracker/Plugins/cactbot/cactbot/ui/pullcounter/pullcounter.html?OVERLAY_WS=ws://127.0.0.1:10501/ws">
