@@ -3,6 +3,15 @@
         const rows = document.querySelectorAll('.combatant');
         if (!rows.length) return;
 
+        // Format total party DPS (encounter DPS)
+        const encounterNode = document.querySelector('.encounter-content-numbers .g-number');
+        if (encounterNode) {
+            const raw = Number(encounterNode.textContent.replace(/,/g, ''));
+            if (!isNaN(raw)) {
+                encounterNode.textContent = raw.toLocaleString("en-US");
+            }
+        }
+
         // Remove previous top-dps class
         rows.forEach(r => r.classList.remove('top-dps'));
 
