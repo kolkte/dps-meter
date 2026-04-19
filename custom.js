@@ -29,6 +29,9 @@
             const dps = Number(dpsNode.textContent.replace(/,/g, ''));
             if (isNaN(dps)) return;
 
+            // Format DPS with thousand separators
+            dpsNode.textContent = dps.toLocaleString("en-US");
+
             // Scale bar
             const pctOfTop = Math.min(dps / topDPS, 1);
             bar.style.setProperty('--bar-width', `${pctOfTop * 120}px`);
@@ -39,7 +42,7 @@
             }
 
             // Percent of total DPS
-            const pct = totalDPS > 0 ? ((dps / totalDPS) * 100).toFixed(0) : "0.0";
+            const pct = totalDPS > 0 ? ((dps / totalDPS) * 100).toFixed(0) : "0";
 
             // Insert or update the % span
             let pctSpan = bar.querySelector('.pct');
@@ -54,4 +57,3 @@
 
     setInterval(updateBars, 60);
 })();
-
